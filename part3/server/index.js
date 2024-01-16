@@ -36,6 +36,7 @@ morgan.token("postData", (req) => {
 });
 
 // middlewares 
+app.use(express.static("dist"))
 app.use(cors())
 // Use morgan middleware with the custom token and 'tiny' configuration
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :postData', { stream: process.stdout }));
