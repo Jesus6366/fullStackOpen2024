@@ -24,6 +24,8 @@ const App = () => {
   const [searchedName, setSearchedName] = useState('');
   const [notification, setNotification] = useState(null)
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   useEffect(() => {
     personsService.getAll().then(data => setPersons(data));
   }, []);
@@ -60,9 +62,14 @@ const App = () => {
       } else {
         const newPerson = { name: newName, number: newNumber };
 
-        const createdPerson = await personsService.create(newPerson);
+        const createdPerson = await personsService.create(newPerson)
+          .then((createdPerson) => {
+            setPersons([...persons, createdPerson]);
+          })
+          .catch((error) => {
+            setErrorMessage(error.response.data.error);
+          });
 
-        setPersons([...persons, createdPerson]);
         setNewName('');
         setNewNumber('');
         showNotification(`Added ${newName} to the phonebook`, 'success');
@@ -96,6 +103,7 @@ const App = () => {
         handleNameChange={handleNameChange}
         handleNumbersChange={handleNumbersChange}
         addPerson={addPerson}
+        errorMessage={errorMessage}
       />
       <Persons persons={persons} searchedName={searchedName} setPersons={setPersons} />
     </div>

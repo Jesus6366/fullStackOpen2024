@@ -13,6 +13,9 @@ const PersonForm = ({ newName, newNumber, handleNameChange, handleNumbersChange,
             <div>
                 <button type="submit">add</button>
             </div>
+            {errorMessage && (
+                <div style={{ color: 'red', marginTop: '1rem' }}>{errorMessage}</div>
+            )}
         </form>
     );
 };
