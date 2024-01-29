@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import CountryDetails from './components/CountryDetails';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import CountryDetails from "./components/CountryDetails";
 
 // const CountryDetails = ({ country }) => {
-
 
 //   return (
 //     <div>
@@ -17,7 +16,7 @@ import CountryDetails from './components/CountryDetails';
 // };
 
 function App() {
-  const [searchCountry, setSearchCountry] = useState('');
+  const [searchCountry, setSearchCountry] = useState("");
   const [allCountries, setAllCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
 
@@ -32,7 +31,7 @@ function App() {
 
   const fetchCountries = () => {
     axios
-      .get('https://studies.cs.helsinki.fi/restcountries/api/all')
+      .get("https://studies.cs.helsinki.fi/restcountries/api/all")
       .then((response) => {
         setAllCountries(response.data);
       })
@@ -51,7 +50,10 @@ function App() {
 
   return (
     <>
-      <h3>Find Countries: <input type="text" onChange={handleSearch} value={searchCountry} /></h3>
+      <h3>
+        Find Countries:{" "}
+        <input type="text" onChange={handleSearch} value={searchCountry} />
+      </h3>
       {filteredCountries.length > 10 ? (
         <p>Too many matches, specify another filter</p>
       ) : filteredCountries.length > 1 ? (
